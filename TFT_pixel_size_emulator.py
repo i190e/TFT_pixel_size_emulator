@@ -7,7 +7,7 @@ from PyQt6.QtGui import QImage, QPixmap
 from PyQt6.QtWidgets import QApplication, QBoxLayout, QComboBox, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QPushButton, QLabel
 from PyQt6.QtCore import QSize, Qt
 import os
-import sys # Только для доступа к аргументом из командной строки
+import sys 
 #define OLED 96x16
 #define OLED 64x32
 #define OLED 64x48
@@ -30,6 +30,7 @@ import sys # Только для доступа к аргументом из к�
 # расчитать в дюймах размеры (пикселей) для размера экрана в дюймах, в зависимости от диагонали монитора. Чтобы на мониторе отображался реальный размер tft (oled) экрана
 
 # Подкласс QMainWindow для настройки главного окна приложения
+
 class MainWindow(QMainWindow):
 
   def __init__(self):
