@@ -2,7 +2,6 @@
 from ast import Pow
 from math import floor
 from random import randint
-#from turtle import delay
 from PyQt6.QtGui import QImage, QPixmap
 from PyQt6.QtWidgets import QApplication, QBoxLayout, QComboBox, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QPushButton, QLabel
 from PyQt6.QtCore import QSize, Qt
