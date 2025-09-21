@@ -1,12 +1,12 @@
-
 from ast import Pow
 from math import floor
 from random import randint
+import sys # Только для доступа к аргументам командной строки
 from PyQt6.QtGui import QImage, QPixmap
 from PyQt6.QtWidgets import QApplication, QBoxLayout, QComboBox, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QPushButton, QLabel
 from PyQt6.QtCore import QSize, Qt
 import os
-import sys 
+
 #define OLED 96x16
 #define OLED 64x32
 #define OLED 64x48
@@ -29,7 +29,6 @@ import sys
 # расчитать в дюймах размеры (пикселей) для размера экрана в дюймах, в зависимости от диагонали монитора. Чтобы на мониторе отображался реальный размер tft (oled) экрана
 
 # Подкласс QMainWindow для настройки главного окна приложения
-
 class MainWindow(QMainWindow):
 
   def __init__(self):
@@ -37,6 +36,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("TFT 160x128 emulator")
         self.setFixedSize(QSize(1280, 1000))
         self.initTftComboBox()
+        self.initTestDrawComboBox()
         self.initDrawWidget()
         self.initButton()
         self.initControlLayout()
@@ -63,6 +63,7 @@ class MainWindow(QMainWindow):
      self.layout = QHBoxLayout()
      self.layout.addWidget(self.widget,Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter)
      self.layoutControls.addWidget(self.tft,Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter)
+     self.layoutControls.addWidget(self.tftDraw,Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter)
      self.layoutControls.addWidget(self.button,Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter)
      self.layout.addLayout(self.layoutControls)
      return
@@ -76,13 +77,13 @@ class MainWindow(QMainWindow):
    self.button.clicked.connect(self.update)
    return  
   
-  def initTftComboBox(self):
+  def initTftComboBox(self): # Выбор размера tft в пикселях
      self.tft = QComboBox()
      self.tft.setFixedSize(200, 60)
      self.tft.showEvent(self.initComboBoxTft())
      return 
- 
-  def initComboBoxTft(self):
+
+  def initComboBoxTft(self): # список tft разрешений
         self.tft.addItem("OLED 96x16",[96,16])
         self.tft.addItem("OLED 64x32",[64,32])
         self.tft.addItem("OLED 64x48",[64,48])
@@ -103,6 +104,15 @@ class MainWindow(QMainWindow):
         self.tft.addItem("TFT 1024x600",[1024,600])  
         self.tft.addItem("TFT 1280x800",[1280,800])  
         self.setResolutionTFT()
+
+  def initTestDrawComboBox(self): # выбор draw test
+     self.tftDraw = QComboBox()
+     self.tftDraw.setFixedSize(200, 60)
+     self.tftDraw.showEvent(self.initTestDrawBox())
+     return 
+  def initTestDrawBox(self):     # список draw test
+     self.tftDraw.addItem("Sierpinski triangle")
+     self.setResolutionTFT()
         
   def setResolutionTFT(self):
         self.setWindowTitle(self.tft.currentText()+" emulator")  
@@ -146,6 +156,9 @@ class MainWindow(QMainWindow):
   def serpinsky(self):        
    self.cornerCords =  [[int(self.image.width()/2), 0],[0, int(self.image.height())],[int(self.image.width()),int(self.image.height())]] 
    self.RecursionDrawing(self.cornerCords[0],0)
+   return
+
+  def Change3Dcoordinates():
    return
       
 # Приложению нужен один (и только один) экземпляр QApplication.
