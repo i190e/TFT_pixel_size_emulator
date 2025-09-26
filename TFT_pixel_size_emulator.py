@@ -133,10 +133,11 @@ class MainWindow(QMainWindow):
     return
   
   def update(self):
-   for i in range(1,1000):
-    self.serpinsky()
+   if(self.tftDraw.currentText()=="Sierpinski triangle"):
+    for i in range(1,1000):
+     self.serpinsky()
    self.drawImage()
-   return 
+   return
  
  
  
